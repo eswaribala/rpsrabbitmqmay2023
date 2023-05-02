@@ -15,7 +15,7 @@ namespace InventoryAPI.Repositories
         {
             return _dbContext.Products.ToList();
         }
-        public Product GetProductById(int id)
+        public Product GetProductById(long id)
         {
             return _dbContext.Products.Where(x => x.ProductId == id).FirstOrDefault();
         }
@@ -31,7 +31,7 @@ namespace InventoryAPI.Repositories
             _dbContext.SaveChanges();
             return result.Entity;
         }
-        public bool DeleteProduct(int Id)
+        public bool DeleteProduct(long Id)
         {
             var filteredData = _dbContext.Products.Where(x => x.ProductId == Id).FirstOrDefault();
             var result = _dbContext.Remove(filteredData);

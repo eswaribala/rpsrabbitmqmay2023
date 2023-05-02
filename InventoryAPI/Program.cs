@@ -1,4 +1,5 @@
 using InventoryAPI.Contexts;
+using InventoryAPI.Producers;
 using InventoryAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ options.UseSqlServer(configuration.
 GetConnectionString("EcommConnection")));
 builder.Services.AddScoped<ICatalogRepository, CatalogRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IRabbitmqProducer, RabbitmqProducer>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
