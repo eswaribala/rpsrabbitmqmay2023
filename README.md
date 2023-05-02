@@ -1,0 +1,1 @@
+# rpsrabbitmqmay2023
