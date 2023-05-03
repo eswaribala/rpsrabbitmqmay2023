@@ -47,6 +47,7 @@ namespace InventoryAPI.Producers
                 basicProperties:properties
                 );
             
+            
                 
             channel.Close();
 
