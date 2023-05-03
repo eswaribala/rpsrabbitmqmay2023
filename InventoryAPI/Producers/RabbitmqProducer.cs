@@ -23,17 +23,17 @@ namespace InventoryAPI.Producers
             connectionFactory.VirtualHost = configuration["amqp:virtualhost"];
             connectionFactory.HostName = configuration["amqp:hostname"];
             connectionFactory.Port = AmqpTcpEndpoint.UseDefaultPort;
-            //create the connection
-             connection = connectionFactory.CreateConnection();
-            //create the channel
-            channel = connection.CreateModel();
-            channel.QueueDeclare("CatalogQueue", false, true, true);
+           
         }
 
 
         public void SendMessage<T>(T message)
         {
-            
+            //create the connection
+            connection = connectionFactory.CreateConnection();
+            //create the channel
+            channel = connection.CreateModel();
+            channel.QueueDeclare("CatalogQueue", false, true, true);
             var json=JsonConvert.SerializeObject(message);
             var body=Encoding.UTF8.GetBytes(json);
             channel.BasicPublish(exchange:"",routingKey:"CatalogQueue",body:body);
