@@ -33,11 +33,22 @@ namespace InventoryAPI.Producers
             connection = connectionFactory.CreateConnection();
             //create the channel
             channel = connection.CreateModel();
-            channel.QueueDeclare("CatalogQueue", false, true, true);
+            channel.ExchangeDeclare("CatalogExchange", ExchangeType.Direct);
+            channel.QueueDeclare("CatalogQueue", false, false, true);
+            channel.QueueBind("CatalogQueue", "CatalogExchange","CatalogExchangeKey");
             var json=JsonConvert.SerializeObject(message);
             var body=Encoding.UTF8.GetBytes(json);
-            channel.BasicPublish(exchange:"",routingKey:"CatalogQueue",body:body);
-           // channel.Close();
+            var properties = channel.CreateBasicProperties();
+            properties.Persistent = false;
+           // byte[] messagebuffer = Encoding.Default.GetBytes("Direct Message");
+            channel.BasicPublish(exchange: "CatalogExchange", 
+                routingKey: "CatalogExchangeKey", 
+                body:body,
+                basicProperties:properties
+                );
+            
+                
+            channel.Close();
 
 
         }
