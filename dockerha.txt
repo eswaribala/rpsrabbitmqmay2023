@@ -4,5 +4,20 @@ docker run -d -h node1.rabbit  --net cluster-network --ip 192.168.0.10  --name r
 
 docker run -d -h node2.rabbit  --net cluster-network --ip 192.168.0.11  --name rabbitNode2 --add-host node1.rabbit:192.168.0.10 -p "4370:4369"  -p "5673:5672"  -p "15673:15672"   -p "25673:25672" -p "35673:35672" -e "RABBITMQ_USE_LONGNAME=true" -e RABBITMQ_ERLANG_COOKIE="cookie" rabbitmq:3-management
 
-docker exec rabbitNode1 rabbitmqctl cluster_status
 
+login to node1 http://localhost:15672
+login to node2 http://localhost:15673
+ 
+//stop the node 2
+docker exec rabbitNode2 rabbitmqctl stop_app
+
+//join the nodes to same cluster
+docker exec rabbitNode2 rabbitmqctl join_cluster rabbit@node1.rabbit
+
+//start the node 2
+docker exec rabbitNode2 rabbitmqctl start_app
+
+docker exec rabbitNode1 rabbitmqctl cluster_status
+ 
+//ha policy run it from ubuntu 
+docker exec rabbitNode1 rabbitmqctl set_policy ha "." '{"ha-mode":"all"}'
