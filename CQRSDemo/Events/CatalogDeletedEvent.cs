@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CQRSCartAPI.Events
+namespace CQRSDemo.Events
 {
-    public class CartDeletedEvent : IEvent
+    public class CatalogDeletedEvent : IEvent
     {
-        public long CartId { get; set; }
+        public long CatalogId { get; set; }
     }
 }

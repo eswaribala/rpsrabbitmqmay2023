@@ -39,8 +39,8 @@ namespace CQRSDemo.Events
             {
                 using (IModel channel = conn.CreateModel())
                 {
-                    var queue = @event is CartCreatedEvent ?
-                        Constants.QUEUE_CART_CREATED : @event is CartUpdatedEvent ?
+                    var queue = @event is CatalogCreatedEvent ?
+                        Constants.QUEUE_CART_CREATED : @event is CatalogUpdatedEvent ?
                             Constants.QUEUE_CART_UPDATED : Constants.QUEUE_CART_DELETED;
                     channel.QueueDeclare(
                         queue: queue,

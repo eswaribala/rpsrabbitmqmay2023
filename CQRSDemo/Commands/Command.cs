@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CQRSCartAPI.Commands
+namespace CQRSDemo.Commands
 {
     public abstract class Command
     {

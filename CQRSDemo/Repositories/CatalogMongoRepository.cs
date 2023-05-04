@@ -21,16 +21,16 @@ namespace CQRSDemo.Repositories
             _db = _client.GetDatabase(DBName);
         }
        
-        public List<CatalogEntity> GetCarts()
+        public List<CatalogEntity> GetCatalogs()
         {
             return _db.GetCollection<CatalogEntity>(CollectionName).Find(_ => true).ToList();
         }
-        public CatalogEntity GetCart(long id)
+        public CatalogEntity GetCatalog(long id)
         {
             return _db.GetCollection<CatalogEntity>(CollectionName).Find
                 (catalog => catalog.CatalogId == id).SingleOrDefault();
         }
-        public CatalogEntity GetCartByCartName(string CatalogName)
+        public CatalogEntity GetCatalogByCatalogName(string CatalogName)
         {
             return _db.GetCollection<CatalogEntity>(CollectionName).Find
                 (catalog => catalog.CatalogName == CatalogName).Single();

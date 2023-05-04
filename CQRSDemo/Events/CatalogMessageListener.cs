@@ -1,4 +1,4 @@
-﻿using CQRSCartAPI.Repositories;
+﻿using CQRSDemo.Repositories;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -10,12 +10,12 @@ using System.Reflection;
 using System.Text;
 
 
-namespace CQRSCartAPI.Events
+namespace CQRSDemo.Events
 {
-    public class CartMessageListener
+    public class CatalogMessageListener
     {
-        private CartMongoRepository _repository;
-        public CartMessageListener(CartMongoRepository repository)
+        private CatalogMongoRepository _repository;
+        public CatalogMessageListener(CatalogMongoRepository repository)
         {
             _repository = repository;
             Debug.WriteLine("Message Listener.....................");
@@ -79,8 +79,8 @@ namespace CQRSCartAPI.Events
             {
                 string messageContent = Encoding.UTF8.GetString(eventArgsDeleted.Body);
                 var bsonDocument = BsonDocument.Parse(messageContent);
-                CartDeletedEvent _deleted = JsonConvert.DeserializeObject<CartDeletedEvent>(messageContent);
-                _repository.Remove(_deleted.CartId);
+                CatalogDeletedEvent _deleted = JsonConvert.DeserializeObject<CatalogDeletedEvent>(messageContent);
+                _repository.Remove(_deleted.CatalogId);
                 subscriptionDeleted.Ack(eventArgsDeleted);
             }
         }
@@ -90,8 +90,8 @@ namespace CQRSCartAPI.Events
             if (eventArgsUpdated != null)
             {
                 string messageContent = Encoding.UTF8.GetString(eventArgsUpdated.Body);
-                CartUpdatedEvent _updated = JsonConvert.DeserializeObject<CartUpdatedEvent>(messageContent);
-                _repository.Update(_updated.ToCartEntity(_repository.GetCart(_updated.CartId)));
+                CatalogUpdatedEvent _updated = JsonConvert.DeserializeObject<CatalogUpdatedEvent>(messageContent);
+                _repository.Update(_updated.ToCartEntity(_repository.GetCatalog(_updated.CatalogId)));
                 subscriptionUpdated.Ack(eventArgsUpdated);
             }
         }
@@ -102,7 +102,7 @@ namespace CQRSCartAPI.Events
             if (eventArgsCreated != null)
             {
                 string messageContent = Encoding.UTF8.GetString(eventArgsCreated.Body);
-                CartCreatedEvent _created = JsonConvert.DeserializeObject<CartCreatedEvent>(messageContent);
+                CatalogCreatedEvent _created = JsonConvert.DeserializeObject<CatalogCreatedEvent>(messageContent);
                 _repository.Create(_created.ToCartEntity());
                 subscriptionCreated.Ack(eventArgsCreated);
             }

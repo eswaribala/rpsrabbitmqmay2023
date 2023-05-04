@@ -10,7 +10,7 @@ namespace CQRSDemo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]   
         [Column("Product_Id")]
         public long ProductId { get; set; }
-        public ProductDescription? ProductDescription { get; set; }
+        public string? ProductName { get; set; }
         [ForeignKey("Catalog")]
         [Column("Catalog_Id_FK")]
         public long CatalogId { get; set; } 

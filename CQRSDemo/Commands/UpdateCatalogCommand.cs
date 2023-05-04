@@ -1,5 +1,5 @@
-﻿using CQRSCartAPI.Events;
-using CQRSCartAPI.Models;
+﻿using CQRSDemo.Events;
+using CQRSDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,32 +7,31 @@ using System.Threading.Tasks;
 
 namespace CQRSDemo.Commands
 {
-    public class UpdateCartCommand : Command
+    public class UpdateCatalogCommand : Command
     {
-        public string CartName { get; set; }
+        public string CatalogName { get; set; }
        
         public List<CreateProductCommand> ProductList { get; set; }
-        public CartUpdatedEvent ToCartEvent()
+        public CatalogUpdatedEvent ToCartEvent()
         {
-            return new CartUpdatedEvent
+            return new CatalogUpdatedEvent
             {
-               CartId=this.Id,
-               CartName=this.CartName,
+               CatalogId=this.Id,
+               CatalogName=this.CatalogName,
 
                ProductList = this.ProductList.Select(product => new ProductCreatedEvent
                 {
                    ProductName=product.ProductName,
-                   Cost=product.Cost,
                    ProductNo=this.Id
                 }).ToList()
             };
         }
-        public Cart ToCartRecord(Cart record)
+        public Catalog ToCartRecord(Catalog record)
         {
-            record.CartName = this.CartName;
+            record.CatalogName = this.CatalogName;
             record.ProductList = this.ProductList.Select(product => new Product
             {
-                Cost=product.Cost,
+                
                 ProductId=product.ProductId,
              ProductName=product.ProductName   
 

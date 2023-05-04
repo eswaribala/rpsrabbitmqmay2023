@@ -1,5 +1,4 @@
-﻿using CQRSDemo.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace CQRSDemo.Events
     {
     
         public long ProductNo { get; set; }
-        public ProductDescriptionEntity ProductDescriptionEntity { get; set; }
-        
+        public string ProductName { get; set; }
+        public long Cost { get; set; }
     }
 }

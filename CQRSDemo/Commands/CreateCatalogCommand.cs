@@ -1,40 +1,39 @@
-﻿using CQRSCartAPI.Events;
-using CQRSCartAPI.Models;
+﻿using CQRSDemo.Events;
+using CQRSDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CQRSCartAPI.Commands
+namespace CQRSDemo.Commands
 {
-    public class CreateCartCommand : Command
+    public class CreateCatalogCommand : Command
     {
-        public string CartName { get; set; }
+        public string CatalogName { get; set; }
         
         public List<CreateProductCommand> ProductList { get; set; }
-        public CartCreatedEvent ToCartEvent(long id)
+        public CatalogCreatedEvent ToCartEvent(long id)
         {
-            return new CartCreatedEvent
+            return new CatalogCreatedEvent
             {
-                CartId = id,
-                CartName = this.CartName,
+                CatalogId = id,
+                CatalogName = this.CatalogName,
                 
                 ProductList = this.ProductList.Select(product => 
                 new ProductCreatedEvent {
                     ProductName=product.ProductName,
-                    Cost = product.Cost,
+                   
                     ProductNo=product.ProductId
                 }).ToList()
             };
         }
-        public Cart ToCartRecord()
+        public Catalog ToCatalogRecord()
         {
-            return new Cart
+            return new Catalog
             {
-                CartName = this.CartName,
+                CatalogName = this.CatalogName,
                ProductList= this.ProductList.Select
-                (product => new Product{ Cost = product.Cost,
-                  ProductName=product.ProductName,
+                (product => new Product{ ProductName=product.ProductName,
                   ProductId=product.ProductId,
                 }).ToList()
             };

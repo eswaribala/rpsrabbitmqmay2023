@@ -1,28 +1,28 @@
-﻿using CQRSCartAPI.Models;
+﻿using CQRSDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CQRSCartAPI.Events
+namespace CQRSDemo.Events
 {
-    public class CartUpdatedEvent : IEvent
+    public class CatalogUpdatedEvent : IEvent
     {
-        public long CartId { get; set; }
-        public string CartName { get; set; }
+        public long CatalogId { get; set; }
+        public string CatalogName { get; set; }
       
         public List<ProductCreatedEvent> ProductList{ get; set; }
-        public CartEntity ToCartEntity(CartEntity CartEntity)
+        public CatalogEntity ToCartEntity(CatalogEntity CatalogEntity)
         {
-            return new CartEntity
+            return new CatalogEntity
             {
-                CartId = this.CartId,
-                CartName = CartEntity.CartName.Equals(this.CartName) ? CartEntity.CartName : this.CartName,
-                ProductList = GetNewOnes(CartEntity.ProductList)
+                CatalogId = this.CatalogId,
+                CatalogName = CatalogEntity.CatalogName.Equals(this.CatalogName) ? CatalogEntity.CatalogName : this.CatalogName,
+                ProductList = GetNewOnes(CatalogEntity.ProductList)
                 .Select(product => new ProductEntity { 
                     ProductId = product.ProductId ,
-                    ProductName = product.ProductName,  
-                    Cost = product.Cost
+                    ProductName = product.ProductName  
+                  
                    }).ToList()
             };
         }
@@ -30,7 +30,7 @@ namespace CQRSCartAPI.Events
         {
             return ProductList.Where(a => !this.ProductList.Any(x => x.ProductNo== a.ProductId
                 && x.ProductName == a.ProductName
-                && x.Cost== a.Cost)).ToList<ProductEntity>();
+                )).ToList<ProductEntity>();
         }
     }
 }

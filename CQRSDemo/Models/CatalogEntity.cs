@@ -15,6 +15,6 @@ namespace CQRSDemo.Models
         public string? CatalogName { get; set; }
         [JsonIgnore]
         [BsonElement]
-        public ICollection<Product> ProductList;
+        public List<ProductEntity> ProductList{ get; set; }
     }
 }

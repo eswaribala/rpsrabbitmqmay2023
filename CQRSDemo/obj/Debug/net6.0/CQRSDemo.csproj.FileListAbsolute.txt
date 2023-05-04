@@ -40,7 +40,6 @@ G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\SQLitePCLRaw.provider.e_s
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\System.Threading.Channels.dll
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\ZstdSharp.dll
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 G:\Local disk\JPMRMQTraining\CQRSDemo\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib

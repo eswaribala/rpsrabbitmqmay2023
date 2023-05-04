@@ -447,12 +447,8 @@
           "lib/net6.0/Newtonsoft.Json.dll": {}
         }
       },
-      "RabbitMQ.Client/6.5.0": {
+      "RabbitMQ.Client/5.2.0": {
         "type": "package",
-        "dependencies": {
-          "System.Memory": "4.5.5",
-          "System.Threading.Channels": "7.0.0"
-        },
         "compile": {
           "lib/netstandard2.0/RabbitMQ.Client.dll": {}
         },
@@ -707,7 +703,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "System.Memory/4.5.5": {
+      "System.Memory/4.5.4": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.1/_._": {}
@@ -801,18 +797,6 @@
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
-        }
-      },
-      "System.Threading.Channels/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/System.Threading.Channels.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/System.Threading.Channels.dll": {}
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
         }
       },
       "ZstdSharp.Port/0.6.2": {
@@ -1608,19 +1592,25 @@
         "packageIcon.png"
       ]
     },
-    "RabbitMQ.Client/6.5.0": {
-      "sha512": "9hY5HiWPtCla1/l0WmXmLnqoX7iKE3neBQUWnetIJrRpOvTbO//XQfQDh++xgHCshL40Kv/6bR0HDkmJz46twg==",
+    "RabbitMQ.Client/5.2.0": {
+      "sha512": "WY73qFhekwALxI+YTf97WkeWjnQXZFjkSc1oCwZ7Pz/XwOthBotr9ty3DhU2F7GuzU0HHyO9z9uW6AXr+TyhLQ==",
       "type": "package",
-      "path": "rabbitmq.client/6.5.0",
+      "path": "rabbitmq.client/5.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE",
         "icon.png",
-        "lib/net461/RabbitMQ.Client.dll",
-        "lib/net461/RabbitMQ.Client.xml",
+        "lib/net451/RabbitMQ.Client.dll",
+        "lib/net451/RabbitMQ.Client.pdb",
+        "lib/net451/RabbitMQ.Client.xml",
+        "lib/netstandard1.5/RabbitMQ.Client.dll",
+        "lib/netstandard1.5/RabbitMQ.Client.pdb",
+        "lib/netstandard1.5/RabbitMQ.Client.xml",
         "lib/netstandard2.0/RabbitMQ.Client.dll",
+        "lib/netstandard2.0/RabbitMQ.Client.pdb",
         "lib/netstandard2.0/RabbitMQ.Client.xml",
-        "rabbitmq.client.6.5.0.nupkg.sha512",
+        "rabbitmq.client.5.2.0.nupkg.sha512",
         "rabbitmq.client.nuspec"
       ]
     },
@@ -1909,10 +1899,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Memory/4.5.5": {
-      "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+    "System.Memory/4.5.4": {
+      "sha512": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
       "type": "package",
-      "path": "system.memory/4.5.5",
+      "path": "system.memory/4.5.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1926,7 +1916,7 @@
         "lib/netstandard2.0/System.Memory.dll",
         "lib/netstandard2.0/System.Memory.xml",
         "ref/netcoreapp2.1/_._",
-        "system.memory.4.5.5.nupkg.sha512",
+        "system.memory.4.5.4.nupkg.sha512",
         "system.memory.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -2140,35 +2130,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Threading.Channels/7.0.0": {
-      "sha512": "qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
-      "type": "package",
-      "path": "system.threading.channels/7.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/System.Threading.Channels.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/System.Threading.Channels.targets",
-        "lib/net462/System.Threading.Channels.dll",
-        "lib/net462/System.Threading.Channels.xml",
-        "lib/net6.0/System.Threading.Channels.dll",
-        "lib/net6.0/System.Threading.Channels.xml",
-        "lib/net7.0/System.Threading.Channels.dll",
-        "lib/net7.0/System.Threading.Channels.xml",
-        "lib/netstandard2.0/System.Threading.Channels.dll",
-        "lib/netstandard2.0/System.Threading.Channels.xml",
-        "lib/netstandard2.1/System.Threading.Channels.dll",
-        "lib/netstandard2.1/System.Threading.Channels.xml",
-        "system.threading.channels.7.0.0.nupkg.sha512",
-        "system.threading.channels.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
     "ZstdSharp.Port/0.6.2": {
       "sha512": "jPao/LdUNLUz8rn3H1D8W7wQbZsRZM0iayvWI4xGejJg3XJHT56gcmYdgmCGPdJF1UEBqUjucCRrFB+4HbJsbw==",
       "type": "package",
@@ -2195,7 +2156,7 @@
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.14.0",
       "MongoDB.Driver >= 2.19.1",
       "Newtonsoft.Json >= 13.0.3",
-      "RabbitMQ.Client >= 6.5.0",
+      "RabbitMQ.Client >= 5.2.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -2276,7 +2237,7 @@
           },
           "RabbitMQ.Client": {
             "target": "Package",
-            "version": "[6.5.0, )"
+            "version": "[5.2.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

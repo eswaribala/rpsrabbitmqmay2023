@@ -9,7 +9,8 @@ namespace CQRSDemo.Models
     {
         [BsonId]
         public long ProductId { get; set; }
-        public ProductDescriptionEntity? ProductDescriptionEntity { get; set; }
+        [BsonElement]
+        public string? ProductName { get; set; }
       
     }
 }
