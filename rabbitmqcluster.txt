@@ -1,0 +1,35 @@
+run it from ubuntu
+kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
+kubectl get all -n rabbitmq-system
+kubectl get all -o wide -n rabbitmq-system
+kubectl apply -f rabbitmq.yaml 
+kubectl get pods -l app.kubernetes.io/name=rabbitmq
+ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml
+kubectl get pods -n cert-manager
+
+kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/releases/latest/download/messaging-topology-operator-with-certmanager.yaml
+
+>kubectl get svc -l app.kubernetes.io/name=rabbitmq
+>kubectl get pods -l app.kubernetes.io/name=rabbitmq
+
+
+==============================================================================================================
+kubectl describe RabbitmqCluster production-rabbitmqcluster 
+kubectl get secret production-rabbitmqcluster-default-user -o jsonpath='{.data.username}' | base64 --decode
+kubectl get secret production-rabbitmqcluster-default-user -o jsonpath='{.data.password}' | base64 --decode
+
+kubectl get all -l app.kubernetes.io/part-of=rabbitmq
+ kubectl exec production-rabbitmqcluster-server-0 -- /bin/sh -c "rabbitmqctl cluster_status --formatter json" | jq
+
+kubectl exec production-rabbitmqcluster-server-0 -- /bin/sh -c "rabbitmqctl cluster_status --formatter json" | jq -r .running_nodes
+kubectl get svc production-rabbitmqcluster -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+
+
+or
+
+helm install mu-rabbit stable/rabbitmq --namespace rabbit
+
+kubectl get deployments,pods,services --namespace rabbit
+
+
+https://www.infracloud.io/blogs/setup-rabbitmq-ha-mode-kubernetes-operator/
