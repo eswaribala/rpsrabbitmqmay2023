@@ -1,0 +1,87 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: rabbit-pod-autoscaler
+rules:
+  - apiGroups: ["*"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "update"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rabbit-pod-autoscaler
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: rabbit-pod-autoscaler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rabbit-pod-autoscaler
+subjects:
+- kind: ServiceAccount
+  name: rabbit-pod-autoscaler
+  namespace: kube-system
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: rabbit-pod-autoscaler
+  name: rabbit-pod-autoscaler
+  namespace: kube-system
+spec:
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbit-pod-autoscaler
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: rabbit-pod-autoscaler
+    spec:
+      serviceAccountName: rabbit-pod-autoscaler
+      containers:
+      - env:
+          - name: INTERVAL
+            value: "30"
+          - name: RABBIT_HOST
+            value: "https://example.cloudamqp.com"
+          - name: RABBIT_USER
+            valueFrom:
+              secretKeyRef:
+                name: rabbit-pod-autoscaler
+                key: rabbit-user
+          - name: RABBIT_PASS
+            valueFrom:
+              secretKeyRef:
+                name: rabbit-pod-autoscaler
+                key: rabbit-pass
+          - name: AUTOSCALING
+            value: >
+              3|10|1|example.namespace|example.deployment|example.vhost|example.queue;
+              3|10|1|example.namespace|example.deployment1|example.vhost|example.queue
+          - name: LOGS
+            value: HIGH
+        name: rabbit-pod-autoscaler
+        image: 'registry-intl.example.aliyuncs.com/example/k8s-rabbit-pod-autoscaler:latest'
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
